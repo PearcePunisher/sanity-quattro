@@ -49,6 +49,43 @@ export default defineType({
       title: 'Body',
       type: 'blockContent',
     }),
+    defineField({
+      name: 'contentRichText',
+      title: 'Content Sections',
+      description: 'Repeatable sections: one Heading (with anchor ID) paired with one Paragraph.',
+      type: 'array',
+      validation: (Rule) => Rule.required().min(1).error('Add at least one content section'),
+      of: [
+        {
+          type: 'object',
+          name: 'contentSection',
+          title: 'Section',
+          fields: [
+            { name: 'heading', title: 'Heading', type: 'string', validation: (Rule) => Rule.required() },
+            {
+              name: 'id',
+              title: 'Anchor ID',
+              type: 'string',
+              description:
+                'Kebab-case anchor for ToC links (e.g., warning-lights). Tip: mirror the heading.',
+              validation: (Rule) =>
+                Rule.required()
+                  .regex(/^[a-z0-9-]+$/, { name: 'kebab-case', invert: false })
+                  .max(96)
+                  .error('Use lowercase letters, numbers and hyphens only'),
+            },
+            { name: 'text', title: 'Paragraph', type: 'text', rows: 5, validation: (Rule) => Rule.required() },
+          ],
+          preview: {
+            select: {heading: 'heading', text: 'text'},
+            prepare({heading, text}) {
+              const subtitle = (text || '').split('\n')[0]
+              return {title: heading || 'Section', subtitle: subtitle || 'Paragraph'}
+            },
+          },
+        },
+      ],
+    }),
   ],
 
   preview: {
