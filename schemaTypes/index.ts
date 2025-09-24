@@ -6,6 +6,6 @@ import audi from './audi'
 import bmw from './bmw'
 import mercedes from './mercedes'
 import porsche from './porsche'
-import vw from './vw'
+import volkswagen from './volkswagen'
 
-export const schemaTypes = [post, author, category, blockContent, audi, bmw, mercedes, porsche, vw]
+export const schemaTypes = [post, author, category, blockContent, audi, bmw, mercedes, porsche, volkswagen]
