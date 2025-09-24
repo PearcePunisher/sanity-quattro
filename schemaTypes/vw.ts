@@ -28,7 +28,7 @@ export default defineType({
     defineField({
       name: 'commonServices',
       title: 'Common Services',
-      description: 'List of common services for Audi vehicles',
+      description: 'List of common services for Volkswagen vehicles',
       type: 'array',
       of: [
         {
@@ -51,7 +51,7 @@ export default defineType({
     defineField({
       name: 'modelCoverage',
       title: 'Model Coverage',
-      description: 'List of Audi models supported',
+      description: 'List of Volkswagen models supported',
       type: 'array',
       of: [{type: 'string'}],
       validation: (Rule) => Rule.unique(),
